@@ -2807,7 +2807,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Quran/Pods-Quran-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Quran/Pods-Quran-frameworks.sh\"\n${PODS_ROOT}/SwiftLint/swiftlint";
 		};
 		AEF32652F2759A39CCB1CBEC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3936,7 +3936,7 @@
 					"$(PROJECT_DIR)/QuranFoundation",
 				);
 				INFOPLIST_FILE = Quran/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quran.ios;
@@ -3964,7 +3964,7 @@
 					"$(PROJECT_DIR)/QuranFoundation",
 				);
 				INFOPLIST_FILE = Quran/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quran.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
