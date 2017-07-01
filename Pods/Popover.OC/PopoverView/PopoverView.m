@@ -21,27 +21,32 @@ float DegreesToRadians(float angle) {
 @interface PopoverView () <UITableViewDelegate, UITableViewDataSource>
 
 #pragma mark - UI
-@property (nonatomic, weak) UIView *keyWindow; ///< 当前窗口
+@property (nonatomic, weak) UIWindow *keyWindow; ///< 当前窗口
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *shadeView; ///< 遮罩层
 @property (nonatomic, weak) CAShapeLayer *borderLayer; ///< 边框Layer
 
 #pragma mark - Data
 @property (nonatomic, copy) NSArray<PopoverAction *> *actions;
-//@property (nonatomic, assign) CGFloat windowWidth; ///< 窗口宽度
-//@property (nonatomic, assign) CGFloat windowHeight; ///< 窗口高度
+@property (nonatomic, assign) CGFloat windowWidth; ///< 窗口宽度
+@property (nonatomic, assign) CGFloat windowHeight; ///< 窗口高度
+@property (nonatomic, assign) BOOL isUpward; ///< 箭头指向, YES为向上, 反之为向下, 默认为YES.
 
 @end
 
 @implementation PopoverView
 
 #pragma mark - Lift Cycle
-- (instancetype _Nonnull)initWithView:(UIView * _Nonnull)container {
-    if (!(self = [super init])) return nil;
-    [self initialize: container];
-    self.style = PopoverViewStyleDark;
-
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame])) return nil;
+    [self initialize];
+    
     return self;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self initialize];
 }
 
 - (void)layoutSubviews {
@@ -73,13 +78,13 @@ float DegreesToRadians(float angle) {
     if (_style == PopoverViewStyleDefault) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor colorWithRed:27 / 255.0 green:107 / 255.0 blue:113 / 255.0 alpha:1.00];
+        self.backgroundColor = [UIColor colorWithRed:0.29 green:0.29 blue:0.29 alpha:1.00];
     }
 }
 
 #pragma mark - Private
 /*! @brief 初始化相关 */
-- (void)initialize:(UIView *)container {
+- (void)initialize {
     // data
     _actions = @[];
     _isUpward = YES;
@@ -89,7 +94,9 @@ float DegreesToRadians(float angle) {
     self.backgroundColor = [UIColor whiteColor];
     
     // keyWindow
-    _keyWindow = container;
+    _keyWindow = [UIApplication sharedApplication].keyWindow;
+    _windowWidth = CGRectGetWidth(_keyWindow.bounds);
+    _windowHeight = CGRectGetHeight(_keyWindow.bounds);
     
     // shadeView
     _shadeView = [[UIView alloc] initWithFrame:_keyWindow.bounds];
@@ -98,7 +105,6 @@ float DegreesToRadians(float angle) {
     
     // tableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _tableView.allowsSelection = NO;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;
@@ -111,10 +117,6 @@ float DegreesToRadians(float angle) {
 
 /*! @brief 显示弹窗指向某个点,  */
 - (void)showToPoint:(CGPoint)toPoint {
-    self.point = toPoint;
-    CGFloat _windowWidth = CGRectGetWidth(_keyWindow.bounds);
-    CGFloat _windowHeight = CGRectGetHeight(_keyWindow.bounds);
-
     NSAssert(_actions.count > 0, @"actions must not be nil or empty !");
     
     // 截取弹窗时相关数据
@@ -134,8 +136,8 @@ float DegreesToRadians(float angle) {
     
     // 遮罩层
     _shadeView.alpha = 0.f;
-//    [_keyWindow addSubview:_shadeView];
-
+    [_keyWindow addSubview:_shadeView];
+    
     // 刷新数据以获取具体的ContentSize
     [_tableView reloadData];
     // 根据刷新后的ContentSize和箭头指向方向来设置当前视图的frame
@@ -228,12 +230,6 @@ float DegreesToRadians(float angle) {
     maskLayer.path = maskPath.CGPath;
     self.layer.mask = maskLayer;
     // 边框 (只有在不显示半透明阴影层时才设置边框线条)
-    for (CALayer *layer in self.layer.sublayers) {
-        if ([[layer class] isSubclassOfClass:[CAShapeLayer class]]) {
-            [layer removeFromSuperlayer];
-        }
-    }
-
     if (!_showShade) {
         CAShapeLayer *borderLayer = [CAShapeLayer layer];
         borderLayer.frame = self.bounds;
@@ -252,10 +248,10 @@ float DegreesToRadians(float angle) {
     self.layer.anchorPoint = CGPointMake(arrowPoint.x/currentW, _isUpward ? 0.f : 1.f);
     self.frame = oldFrame;
     self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
-//    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.25f animations:^{
         self.transform = CGAffineTransformIdentity;
         _shadeView.alpha = 1.f;
-//    }];
+    }];
 }
 
 /*! @brief 计算最大宽度 */
@@ -303,19 +299,14 @@ float DegreesToRadians(float angle) {
 
 /*! @brief 点击外部隐藏弹窗 */
 - (void)hide {
-//    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.25f animations:^{
         self.alpha = 0.f;
         _shadeView.alpha = 0.f;
         self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
-//    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished) {
         [_shadeView removeFromSuperview];
         [self removeFromSuperview];
-//    }];
-}
-
-- (void)hideNoAnimation {
-    [_shadeView removeFromSuperview];
-    [self removeFromSuperview];
+    }];
 }
 
 #pragma mark - Public
@@ -325,8 +316,6 @@ float DegreesToRadians(float angle) {
 
 /*! @brief 指向指定的View来显示弹窗 */
 - (void)showToView:(UIView *)pointView withActions:(NSArray<PopoverAction *> *)actions {
-    CGFloat _windowHeight = CGRectGetHeight(_keyWindow.bounds);
-
     // 判断 pointView 是偏上还是偏下
     CGRect pointViewRect = [pointView.superview convertRect:pointView.frame toView:_keyWindow];
     CGFloat pointViewUpLength = CGRectGetMinY(pointViewRect);
@@ -349,10 +338,10 @@ float DegreesToRadians(float angle) {
 }
 
 /*! @brief 指向指定的点来显示弹窗 */
-- (void)showToPoint:(CGPoint)toPoint isUpward:(BOOL)isUpward withActions:(NSArray<PopoverAction *> *)actions {
+- (void)showToPoint:(CGPoint)toPoint withActions:(NSArray<PopoverAction *> *)actions {
     _actions = [actions copy];
     // 计算箭头指向方向
-    _isUpward = isUpward;
+    _isUpward = toPoint.y <= _windowHeight - toPoint.y;
     [self showToPoint:toPoint];
 }
 
@@ -380,16 +369,16 @@ static NSString *kPopoverCellIdentifier = @"kPopoverCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [UIView animateWithDuration:0.25f animations:^{
-//        self.alpha = 0.f;
-//        _shadeView.alpha = 0.f;
-//    } completion:^(BOOL finished) {
+    [UIView animateWithDuration:0.25f animations:^{
+        self.alpha = 0.f;
+        _shadeView.alpha = 0.f;
+    } completion:^(BOOL finished) {
         PopoverAction *action = _actions[indexPath.row];
         action.handler ? action.handler(action) : NULL;
-//        _actions = nil;
-//        [_shadeView removeFromSuperview];
-//        [self removeFromSuperview];
-//    }];
+        _actions = nil;
+        [_shadeView removeFromSuperview];
+        [self removeFromSuperview];
+    }];
 }
 
 @end

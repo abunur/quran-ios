@@ -18,11 +18,11 @@
 
 @implementation PopoverAction
 
-+ (instancetype _Nonnull)actionWithTitle:(NSString *)title handler:(void (^)(PopoverAction *action))handler {
++ (instancetype)actionWithTitle:(NSString *)title handler:(void (^)(PopoverAction *action))handler {
     return [self actionWithImage:nil title:title handler:handler];
 }
 
-+ (instancetype _Nonnull)actionWithImage:(UIImage *)image title:(NSString *)title handler:(void (^)(PopoverAction *action))handler {
++ (instancetype)actionWithImage:(UIImage *)image title:(NSString *)title handler:(void (^)(PopoverAction *action))handler {
     PopoverAction *action = [[self alloc] init];
     action.image = image;
     action.title = title ? : @"";
