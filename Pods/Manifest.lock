@@ -50,7 +50,7 @@ DEPENDENCIES:
   - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, branch `swift4-beta1`)
   - RxCocoa
   - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, branch `swift4.0`)
-  - SQLite.swift (~> 0.11.0)
+  - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`, branch `swift-4`)
   - SwiftLint (from `https://github.com/realm/SwiftLint.git`, branch `jp-swift-4`)
   - SwiftMonkey
   - SwiftyJSON
@@ -63,6 +63,9 @@ EXTERNAL SOURCES:
   RxSwift:
     :branch: swift4.0
     :git: https://github.com/ReactiveX/RxSwift.git
+  SQLite.swift:
+    :branch: swift-4
+    :git: https://github.com/stephencelis/SQLite.swift.git
   SwiftLint:
     :branch: jp-swift-4
     :git: https://github.com/realm/SwiftLint.git
@@ -74,6 +77,9 @@ CHECKOUT OPTIONS:
   RxSwift:
     :commit: 43cf3b1958d53112199bb0bc7c9efe9fa5a407be
     :git: https://github.com/ReactiveX/RxSwift.git
+  SQLite.swift:
+    :commit: 5e771a1af67f52b5154cc5e9ee3f0f5f4a3e07a5
+    :git: https://github.com/stephencelis/SQLite.swift.git
   SwiftLint:
     :commit: ad90413304e18074732b8e5c2646e761ffb5a509
     :git: https://github.com/realm/SwiftLint.git
@@ -93,12 +99,12 @@ SPEC CHECKSUMS:
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxSwift: 52c0cf4799c1db7de469b6a68c4f786be7bc9f14
-  SQLite.swift: 99b36c22084427f0abbeb957556ce1528cf10bb3
+  SQLite.swift: 79e1f0559d8a21ecc0efcf353088ea13d838335e
   SwiftLint: 3537a05b34060e78e7510f04fb7537d738247803
   SwiftMonkey: dc5681bf881dd84efcc7ff684a31582d5ac67232
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 190848cb7e2634053087c5e69a91816f529eb0f9
+PODFILE CHECKSUM: e7bae68faccca8d634c31065851029c32c4733fc
 
 COCOAPODS: 1.3.0.beta.2
