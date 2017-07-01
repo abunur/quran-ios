@@ -3,61 +3,61 @@ use_frameworks!
 swift_version = "3.1"
 
 target 'VFoundation' do
-    pod 'PromiseKit'
-    pod 'SwiftyJSON'
-    pod 'RxSwift'
-    pod 'SwiftLint'
+  pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'SwiftyJSON'
+  pod 'RxSwift',  :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'swift4.0'
+  pod 'SwiftLint',  :git => 'https://github.com/realm/SwiftLint.git', :branch => 'jp-swift-4'
 end
 
 target 'SQLitePersistence' do
-    pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
+  pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
 end
 
 target 'BatchDownloader' do
-    pod 'PromiseKit'
-    pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
+  pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
 end
 
 target 'UIKitExtension' do
-    pod 'PromiseKit'
-    pod 'RxSwift'
-    pod 'RxCocoa'
+  pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'RxSwift',  :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'swift4.0'
+  pod 'RxCocoa'
 end
 
 target 'QueuePlayer' do
-    pod 'KVOController'
+  pod 'KVOController'
 end
 
 target 'Quran' do
-
-    pod 'GenericDataSources'
-    pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
-    pod 'Zip', '~> 0.6'
-    pod 'Fabric'
-    pod 'Crashlytics'
-    pod 'MenuItemKit'
-    pod 'Moya'
-    pod 'SwiftyJSON'
-    pod 'PromiseKit'
-    pod 'DownloadButton'
-    pod 'KVOController'
-    pod 'NSDate+TimeAgo'
-    pod 'RxSwift'
-    pod 'RxCocoa'
-    pod 'Popover.OC'
+  
+  pod 'GenericDataSources'
+  pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
+  pod 'Zip', '~> 0.6'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'MenuItemKit'
+  pod 'Moya'
+  pod 'SwiftyJSON'
+pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'DownloadButton'
+  pod 'KVOController'
+  pod 'NSDate+TimeAgo'
+  pod 'RxSwift',  :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'swift4.0'
+  pod 'RxCocoa'
+  pod 'Popover.OC'
 end
 
 target 'QuranTests' do
-
-    pod 'Zip', '~> 0.6'
-    pod 'Moya'
-    pod 'PromiseKit'
-    pod 'KVOController'
-    pod 'RxSwift'
-    pod 'RxCocoa'
-    pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
+  
+  pod 'Zip', '~> 0.6'
+  pod 'Moya'
+   pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'KVOController'
+  pod 'RxSwift',  :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'swift4.0'
+  pod 'RxCocoa'
+  pod 'SQLite.swift', '~> 0.11.0', :inhibit_warnings => true
 end
 
 target 'QuranUITests' do
-    pod "SwiftMonkey", :inhibit_warnings => true
+  pod "SwiftMonkey", :inhibit_warnings => true
 end
