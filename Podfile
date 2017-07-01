@@ -38,7 +38,7 @@ target 'Quran' do
   pod 'MenuItemKit'
   pod 'Moya'
   pod 'SwiftyJSON'
-pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
   pod 'DownloadButton'
   pod 'KVOController'
   pod 'NSDate+TimeAgo'
@@ -51,7 +51,7 @@ target 'QuranTests' do
   
   pod 'Zip', '~> 0.6'
   pod 'Moya'
-   pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
+  pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
   pod 'KVOController'
   pod 'RxSwift',  :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'swift4.0'
   pod 'RxCocoa'
