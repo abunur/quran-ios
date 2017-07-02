@@ -10,12 +10,12 @@ target 'VFoundation' do
 end
 
 target 'SQLitePersistence' do
-  pod 'SQLite.swift', :git => 'https://github.com/thebluepotato/SQLite.swift.git', :branch => 'swift-4'
+  pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift.git', :branch => 'swift-4'
 end
 
 target 'BatchDownloader' do
   pod 'PromiseKit',  :git => 'https://github.com/mxcl/PromiseKit.git', :branch => 'swift4-beta1'
-  pod 'SQLite.swift', :git => 'https://github.com/thebluepotato/SQLite.swift.git', :branch => 'swift-4'
+  pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift.git', :branch => 'swift-4'
 end
 
 target 'UIKitExtension' do
@@ -31,7 +31,7 @@ end
 target 'Quran' do
   
   pod 'GenericDataSources'
-  pod 'SQLite.swift', :git => 'https://github.com/thebluepotato/SQLite.swift.git', :branch => 'swift-4'
+  pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift.git', :branch => 'swift-4'
   pod 'Zip', '~> 0.6'
   pod 'Fabric'
   pod 'Crashlytics'
@@ -55,7 +55,7 @@ target 'QuranTests' do
   pod 'KVOController'
   pod 'RxSwift',  :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'swift4.0'
   pod 'RxCocoa'
-  pod 'SQLite.swift', :git => 'https://github.com/thebluepotato/SQLite.swift.git', :branch => 'swift-4'
+  pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift.git', :branch => 'swift-4'
 end
 
 target 'QuranUITests' do
